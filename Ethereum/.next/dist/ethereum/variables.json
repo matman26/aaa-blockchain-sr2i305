@@ -1,0 +1,7 @@
+{
+  "factory_addr": "0x84f8e77bA4F5DB1d9Fb3e9BCe5731704f145D30d",
+  "login_addr": "0x053f663eD692DF09a164BF0CCbE346989b9f7e48",
+  "metamask_mnemonic": "defense control hotel blossom card involve autumn tomato one critic album prepare",
+  "infura_endpoint": "https://rinkeby.infura.io/v3/1918d37b1aa04dde9832c6a1fc8a18c3",
+  "infura_websocket_endpoint": "wss://rinkeby.infura.io/ws/v3/1918d37b1aa04dde9832c6a1fc8a18c3"
+}
