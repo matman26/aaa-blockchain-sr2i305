@@ -20,17 +20,20 @@ class Login extends Component{
       const secret = randomString({length: 15, type:'base64'})
       var hash = web3.utils.sha3(secret)
       var signature = await web3.eth.personal.sign(hash, accounts[0])
-      localStorage.setItem('session', signature)
-      console.log(signature)
+      console.log("signature",signature)
+      console.log("hash",hash)
+      var ans = ""
+
       try{
-        await login.methods.login(signature).call()
+        ans = await login.methods.recover(hash,signature).call()
+        console.log(ans);
+        
       }catch(error){
         console.log(error); 
       }
-      
-      var signing_address = await web3.eth.personal.ecRecover(hash, signature)
-      console.log(signing_address);
-      if(signing_address.toLowerCase() === accounts[0].toLowerCase()) {
+    
+      if(ans.toLowerCase() === accounts[0].toLowerCase()) {
+        localStorage.setItem('session', signature)
         Router.pushRoute('/');
       }
  
