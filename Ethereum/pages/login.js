@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useLayoutEffect } from 'react';
 import randomString from 'crypto-random-string'
 
 import login from '../ethereum/login';
@@ -9,6 +9,7 @@ import {Router, Link } from '../routes'
 
 class Login extends Component{
   state = {
+    username: '',
     errorMess: '',
     loading: false
   };
@@ -22,25 +23,26 @@ class Login extends Component{
       var signature = await web3.eth.personal.sign(hash, accounts[0])
       console.log("signature",signature)
       console.log("hash",hash)
-      var ans = ""
-
+      var ans = "";
+      
       try{
-        ans = await login.methods.recover(hash,signature).call()
-        console.log(ans);
-        
+        ans = await login.methods.signIn(hash,signature, this.state.username,1).send({
+          from: accounts[0]
+        })  
       }catch(error){
-        console.log(error); 
+        this.setState({errorMess: error.message});
       }
     
-      if(ans.toLowerCase() === accounts[0].toLowerCase()) {
+      if(ans.status === true) {
         localStorage.setItem('session', signature)
+        console.log(ans);
         Router.pushRoute('/');
+      }else{
+        this.setState({errorMess: "Authentication has failed"});
       }
- 
     } catch (error) {
       this.setState({errorMess: error.message});
     }
-
   }
 
   render(){
@@ -54,20 +56,21 @@ class Login extends Component{
             </Header>
             <Form size='large' onSubmit={this.onSubmit} error={!!this.state.errorMess}>
               <Segment stacked>
-                <Form.Input fluid icon='user' iconPosition='left' />
+                <Form.Input
+                  fluid
+                  icon='user'
+                  iconPosition='left'
+                  placeholder='Username'
+                  onChange={event => 
+                    this.setState({username: event.target.value})
+                  }
+                />
                 <Message 
                   error 
                   header='Something went wrong' 
                   content={this.state.errorMess} 
                   compact
                 />
-                {/* <Form.Input
-                  fluid
-                  icon='lock'
-                  iconPosition='left'
-                  placeholder='Password'
-                  type='password'
-                /> */}
                 <Button color='blue' fluid size='large' type='submit' loading={this.state.loading}>
                   Login
                 </Button>
