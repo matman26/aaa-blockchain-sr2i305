@@ -9,7 +9,7 @@ is mostly used for documentation and as a guide.
 ** Container Setup
 Build the docker container, then access the CLI for using cleos commands
 #+BEGIN_SRC 
-docker built -t my-eos-node ./docker/eos-node/
+docker build -t my-eos-node .
 docker run -it my-eos-node
 #+END_SRC
 
