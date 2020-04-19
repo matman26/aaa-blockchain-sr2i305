@@ -30,9 +30,7 @@ const deploy  = async () => {
   envVariables.factory_addr = factory.options.address
   envVariables.login_addr = login.options.address
   fs.writeFile("./ethereum/variables.json", JSON.stringify(envVariables))
-  console.log(envVariables);
   
-
 };
 
 deploy();

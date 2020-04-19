@@ -13,13 +13,22 @@ contract UserManagement{
 		address signer = recover(_hash,_signature);
 		require(signer == msg.sender,"The address does not match to the one on the signature");
 		if(!users_db[signer].exist ){
-			require(!compareStrings(_username,""),"No username provided");
-			users_db[signer] = User({
+			if(compareStrings(_username,"")){
+				revert("No user name given");
+			}else{
+				users_db[signer] = User({
 				username: _username,
 				role: _role,
 				exist:true
-			});
+				});
+			}
 		}
+	}
+
+	function profile(address user) public returns(string,bool){
+		require(users_db[user].exist,"Not user found with that address");
+		User memory tempUser = users_db[user];
+		return(tempUser.username,tempUser.role);
 	}
 
 	function recover(bytes32 hash, bytes memory signature) internal pure returns (address) {

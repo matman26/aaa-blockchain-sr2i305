@@ -11,8 +11,18 @@ class Login extends Component{
   state = {
     username: '',
     errorMess: '',
+    role: -1,
     loading: false
   };
+
+  resetState(){
+    this.state = {
+      username: '',
+      errorMess: '',
+      role: -1,
+      loading: false
+    }
+  }
   onSubmit = async (event) =>{
     event.preventDefault();
     this.setState({loading:true,errorMess:''});
@@ -24,27 +34,27 @@ class Login extends Component{
       console.log("signature",signature)
       console.log("hash",hash)
       var ans = "";
-      
-      try{
-        ans = await login.methods.signIn(hash,signature, this.state.username,1).send({
-          from: accounts[0]
-        })  
-      }catch(error){
-        this.setState({errorMess: error.message});
-      }
-    
+      ans = await login.methods.signIn(hash,signature, this.state.username,1).send({
+        from: accounts[0]
+      }) 
+      const profile = await login.methods.profile(accounts[0]).call()
+      this.state.username = profile[0]
+      this.state.role = profile[1]
+      console.log("Profile",profile);
       if(ans.status === true) {
         localStorage.setItem('session', signature)
-        console.log(ans);
-        Router.pushRoute('/');
+        // Router.pushRoute('/');
       }else{
         this.setState({errorMess: "Authentication has failed"});
       }
-    } catch (error) {
-      this.setState({errorMess: error.message});
-    }
-  }
 
+      this.setState({loading:false,errorMess:''});
+    } catch (error) {
+      this.setState({errorMess: "Not username provided"});
+
+    }
+    this.resetState()
+  }
   render(){
     return(
       <Layout>
@@ -76,9 +86,6 @@ class Login extends Component{
                 </Button>
               </Segment>
             </Form>
-            {/* <Message>
-              New to us? <a href='#'>{this.props.address}</a>
-            </Message> */}
           </Grid.Column>
         </Grid>
       </Layout>
