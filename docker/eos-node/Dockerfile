@@ -7,9 +7,9 @@ ENV PRIVATE_KEY=${PRIVATE_KEY}
 ARG PUBLIC_KEY=EOS6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV
 ENV PUBLIC_KEY=${PUBLIC_KEY}
 
-# Get dependencies, text editor
+# Get some packages, text editor
 RUN apt update 
-RUN apt install -y wget vim
+RUN apt install -y wget vim net-tools
 
 # Install from binary package
 RUN wget https://github.com/eosio/eos/releases/download/v2.0.4/eosio_2.0.4-1-ubuntu-18.04_amd64.deb 
@@ -23,11 +23,9 @@ EXPOSE 8888
 RUN wget https://eosnodes.privex.io/static/genesis.json
 
 # Config file for the node
-COPY ./config/config.ini /root/.local/share/eosio/nodeos/config/genesis.json
+COPY ./config/genesis.json /root/.local/share/eosio/nodeos/config/genesis.json
 COPY ./config/config.ini /root/.local/share/eosio/nodeos/config/config.ini
 COPY ./aaa /root/aaa/
 COPY ./bootstrap.sh /root/bootstrap.sh
 
 ENTRYPOINT ["./root/bootstrap.sh"]
-#ENTRYPOINT ["/bin/sh"]
-
