@@ -1,1 +1,7 @@
-{"factory_addr":"0xA135FED671Ee4da6a76A22a8A24386881946a850","login_addr":"0xcb7B4aCC96F2528Ccd0A3bf1c7F97Ed2C5cCEce7","metamask_mnemonic":"defense control hotel blossom card involve autumn tomato one critic album prepare","infura_endpoint":"https://rinkeby.infura.io/v3/1918d37b1aa04dde9832c6a1fc8a18c3","infura_websocket_endpoint":"wss://rinkeby.infura.io/ws/v3/1918d37b1aa04dde9832c6a1fc8a18c3"}
+{
+  "factory_addr": "0xA135FED671Ee4da6a76A22a8A24386881946a850",
+  "login_addr": "0xcb7B4aCC96F2528Ccd0A3bf1c7F97Ed2C5cCEce7",
+  "metamask_mnemonic": "defense control hotel blossom card involve autumn tomato one critic album prepare",
+  "infura_endpoint": "https://rinkeby.infura.io/v3/1918d37b1aa04dde9832c6a1fc8a18c3",
+  "infura_websocket_endpoint": "wss://rinkeby.infura.io/ws/v3/1918d37b1aa04dde9832c6a1fc8a18c3"
+}

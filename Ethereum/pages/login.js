@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
-import randomString from 'crypto-random-string';
 import Cookie from 'js-cookie';
-import login from '../ethereum/login';
-import web3 from '../ethereum/we3'
 import {signUp} from '../lib/auth'
 import { Button, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui-react'
 import Layout from '../components/Layout'
