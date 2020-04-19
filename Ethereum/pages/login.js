@@ -1,8 +1,9 @@
-import React, { Component, useLayoutEffect } from 'react';
-import randomString from 'crypto-random-string'
-
+import React, { Component } from 'react';
+import randomString from 'crypto-random-string';
+import Cookie from 'js-cookie';
 import login from '../ethereum/login';
 import web3 from '../ethereum/we3'
+import {signUp} from '../lib/auth'
 import { Button, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui-react'
 import Layout from '../components/Layout'
 import {Router, Link } from '../routes'
@@ -26,32 +27,13 @@ class Login extends Component{
   onSubmit = async (event) =>{
     event.preventDefault();
     this.setState({loading:true,errorMess:''});
-    try {
-      const accounts = await web3.eth.getAccounts();
-      const secret = randomString({length: 15, type:'base64'})
-      var hash = web3.utils.sha3(secret)
-      var signature = await web3.eth.personal.sign(hash, accounts[0])
-      console.log("signature",signature)
-      console.log("hash",hash)
-      var ans = "";
-      ans = await login.methods.signIn(hash,signature, this.state.username,1).send({
-        from: accounts[0]
-      }) 
-      const profile = await login.methods.profile(accounts[0]).call()
-      this.state.username = profile[0]
-      this.state.role = profile[1]
-      console.log("Profile",profile);
-      if(ans.status === true) {
-        localStorage.setItem('session', signature)
-        // Router.pushRoute('/');
-      }else{
-        this.setState({errorMess: "Authentication has failed"});
-      }
-
-      this.setState({loading:false,errorMess:''});
-    } catch (error) {
-      this.setState({errorMess: "Not username provided"});
-
+    const {result} = await signUp(this.state.username,1)
+    console.log("Token: ",result)
+    if(result.status === true){
+      Cookie.set('session', result.signature)
+      Router.pushRoute('/');
+    }else{
+      this.setState({errorMess: result})
     }
     this.resetState()
   }
