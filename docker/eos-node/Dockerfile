@@ -16,6 +16,7 @@ EXPOSE 8888
 RUN wget https://eosnodes.privex.io/static/genesis.json
 
 # Config file for the node
+COPY ./config/config.ini /root/.local/share/eosio/nodeos/config/genesis.json
 COPY ./config/config.ini /root/.local/share/eosio/nodeos/config/config.ini
 COPY ./aaa /root/
 
