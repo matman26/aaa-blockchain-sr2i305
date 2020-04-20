@@ -12,7 +12,7 @@ class Header extends Component {
     const { activeItem } = this.state
     return (
       <div>
-         <Menu pointing style={{marginTop: '2em'}}>
+         {/* <Menu pointing style={{marginTop: '2em'}}>
             
               <Link route='/'>
                 <a className="item">Crowdcoin</a>
@@ -26,6 +26,16 @@ class Header extends Component {
             <Menu.Menu position='right'>
             <Link route='/login'
               >
+              <a className="item">Login</a>
+            </Link>
+            </Menu.Menu>
+          </Menu> */}
+          <Menu pointing style={{marginTop: '2em'}}>
+            <Link route='/'>
+              <a className="item">AAA with Blockchain</a>
+            </Link>
+            <Menu.Menu position='right'>
+            <Link route='/login'>
               <a className="item">Login</a>
             </Link>
             </Menu.Menu>
