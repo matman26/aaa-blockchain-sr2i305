@@ -7,10 +7,11 @@ Most of these steps will be incorporated into the Dockerfile, this section
 is mostly used for documentation and as a guide.
 
 ** Container Setup
-Build the docker container, then access the CLI for using cleos commands
+Build the docker container and network, then access the CLI for using cleos commands
 #+BEGIN_SRC 
+docker network create private-net
 docker build -t my-eos-node .
-docker run -it my-eos-node
+docker run -it --net private-net -p 8888:8888 my-eos-node 
 #+END_SRC
 
 Open two terminal windows on the container. One of them should run:
@@ -59,3 +60,4 @@ needs to be registered to the users table.
 #+BEGIN_SRC 
 cleos push action provider login '["matheus"]' -p matheus@active
 #+END_SRC
+
