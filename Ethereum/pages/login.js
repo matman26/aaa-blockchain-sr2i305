@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Cookie from 'js-cookie';
 import {signUp} from '../lib/auth'
+import eosApi from '../lib/eosAPI'
 import { Button, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui-react'
 import Layout from '../components/Layout'
 import {Router, Link } from '../routes'
@@ -21,7 +22,7 @@ class Login extends Component{
       loading: false
     }
   }
-  onSubmit = async (event) =>{
+  onSubmitEth = async (event) =>{
     event.preventDefault();
     this.setState({loading:true,errorMess:''});
     const {result} = await signUp(this.state.username,1)
@@ -34,6 +35,15 @@ class Login extends Component{
     }
     this.resetState()
   }
+
+  onSubmitEOS = async (event) =>{
+    event.preventDefault();
+    this.setState({loading:true,errorMess:''});
+    console.log("Acaaaa");
+    return eosApi.login(this.state.username)
+    console.log("Despues promesa");
+  }
+
   render(){
     return(
       <Layout>
@@ -45,7 +55,7 @@ class Login extends Component{
             <Header.Content>Log-in to your account</Header.Content>
               
             </Header>
-            <Form size='large' onSubmit={this.onSubmit} error={!!this.state.errorMess}>
+            <Form size='large' onSubmit={this.onSubmitEth} error={!!this.state.errorMess}>
               <Segment stacked>
                 <Form.Input
                   fluid
@@ -73,7 +83,7 @@ class Login extends Component{
             <Header as='h2' color='blue' textAlign='center'>
               <Header.Content>Log-in to your account</Header.Content>
             </Header>
-            <Form size='large'>
+            <Form size='large' onSubmit={this.onSubmitEOS} error={!!this.state.errorMess}>
               <Segment stacked>
                 <Form.Input
                   fluid
@@ -84,12 +94,12 @@ class Login extends Component{
                     this.setState({username: event.target.value})
                   }
                 />
-                {/* <Message 
+                <Message 
                   error 
                   header='Something went wrong' 
                   content={this.state.errorMess} 
                   compact
-                /> */}
+                />
                 <Button color='blue' fluid size='large' type='submit'>
                   Login
                 </Button>

@@ -36,28 +36,28 @@ cleos wallet import -n user \
 Create two accounts, one for the blockchain user and one the the AAA authority
 
 #+BEGIN_SRC 
-cleos create account eosio provider "${PRIVATE_KEY}"
-cleos create account eosio matheus "${PRIVATE_KEY}"
+cleos create account eosio aaa "${PUBLIC_KEY}"
+cleos create account eosio matheus "${PUBLIC_KEY}"
 #+END_SRC
 
 ** Deploy contract
-Deploy the AAA contract to the provider account
+Deploy the AAA contract to the aaa account
 #+BEGIN_SRC 
-cleos set contract provider /root/aaa -p provider@active"
+cleos set contract aaa /root/aaa -p aaa@active"
 #+END_SRC
 
 ** Call contract
 Push data to contract, recover the users table, change user's role
 #+BEGIN_SRC 
-cleos push action provider adduser '["matheus"]' -p matheus@active
-cleos get table provider provider users
-cleos push action provider setrole '["matheus",1]' -p matheus@active
-cleos get table provider provider users
+cleos push action aaa adduser '["matheus"]' -p matheus@active
+cleos get table aaa aaa users
+cleos push action aaa setrole '["matheus",1]' -p matheus@active
+cleos get table aaa aaa users
 #+END_SRC
 
 The login action requires the authority (validation) of the blockchain user, the user also 
 needs to be registered to the users table.
 #+BEGIN_SRC 
-cleos push action provider login '["matheus"]' -p matheus@active
+cleos push action aaa login '["matheus"]' -p matheus@active
 #+END_SRC
 
