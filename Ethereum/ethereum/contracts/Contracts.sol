@@ -12,6 +12,10 @@ contract UserManagement{
 	function signIn(bytes32 _hash, bytes memory _signature,string _username, bool _role) public{
 		address signer = recover(_hash,_signature);
 		require(signer == msg.sender,"The address does not match to the one on the signature");
+		addUser(signer,_username,_role);
+	}
+
+	function addUser(address signer, string _username, bool _role) internal{
 		if(!users_db[signer].exist ){
 			if(compareStrings(_username,"")){
 				revert("No user name given");
@@ -25,7 +29,15 @@ contract UserManagement{
 		}
 	}
 
-	function profile(address user) public returns(string,bool){
+	function removeUser(bytes32 _hash, bytes memory _signature) public{
+		address signer = recover(_hash,_signature);
+		require(signer == msg.sender,"The address does not match to the one on the signature");
+		if(users_db[signer].exist )
+			delete users_db[signer];
+	}
+
+
+	function profile(address user) public view returns(string,bool){
 		require(users_db[user].exist,"Not user found with that address");
 		User memory tempUser = users_db[user];
 		return(tempUser.username,tempUser.role);
@@ -35,7 +47,6 @@ contract UserManagement{
 		if (signature.length != 65) {
 			revert("ECDSA: invalid signature length");
 		}
-
 		// Divide the signature in r, s and v variables
 		bytes32 r;
 		bytes32 s;
@@ -53,7 +64,6 @@ contract UserManagement{
 		if (v != 27 && v != 28) {
 			revert("ECDSA: invalid signature 'v' value");
 		}
-
 		// If the signature is valid (and not malleable), return the signer address
 		address signer = ecrecover(toEthSignedMessageHash(hash), v, r, s);
 		require(signer != address(0), "ECDSA: invalid signature");
@@ -66,11 +76,10 @@ contract UserManagement{
 			// enforced by the type signature above
 		return keccak256(abi.encodePacked("\x19Ethereum Signed Message:\n32", hash));
 	}
-	
+
 	function compareStrings(string s1, string s2) public returns(bool){
         return keccak256(s1) == keccak256(s2);
 	}
-	
 }
 
 

@@ -2,7 +2,7 @@
 # Start Nodeos in the background
 nohup nodeos 2>&1 1>/root/nodeos.log &
 
-sleep 2
+sleep 10
 
 PARAMS='-u http://172.18.0.2:8888 '
 # This creates an empty wallet; by default wallets are unlocked

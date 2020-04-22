@@ -1,0 +1,20 @@
+version: "3"
+services:
+  react:
+    build:
+      context: ./Ethereum
+      dockerfile: Dockerfile 
+    ports:
+      - "3000:3000"
+    networks:
+      - private_net  
+  eos-node:
+    build:
+      context: ./docker/eos-node
+      dockerfile: Dockerfile  
+    ports:
+      - "8888:8888"
+    networks:
+      - private_net      
+networks:
+  private_net:

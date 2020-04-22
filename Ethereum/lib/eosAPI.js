@@ -4,43 +4,41 @@ import { JsSignatureProvider } from 'eosjs/dist/eosjs-jssig';
 async function takeAction(action, datavalue){
   const privateKey = '5KQwrPbwdL6PhXujxW37FSSQZ1JiwsST4cqQzDeyXtP79zkvFD3'
   const signatureProvider = new JsSignatureProvider([privateKey]);
-  const rcp = new JsonRpc('http://172.18.0.2:8888');
+  const rpc = new JsonRpc('http://127.0.0.1:8888');
   const api = new Api({
-    rcp,
-    signatureProvider, 
-    textDecoder: new TextDecoder(), 
-    textEncoder: new TextEncoder()
-  })
-  try {
-    const resp = await rcp.get_table_rows({
-      json: true,              // Get the response as json
-      code: 'eosio.token',     // Contract that we target
-      scope: 'aaa',         // Account that owns the data
-      table: 'users',       // Table name
-      limit: 10,               // Maximum number of rows that we want to get
-      reverse: false,         // Optional: Get reversed data
-      show_payer: false     // Optional: Show ram payer
-    });
-    console.log(resp)
-  } catch (e) {
-    console.error('\nCaught exception: ' + e);
-    if (e instanceof RpcError)
-      console.log(JSON.stringify(e.json, null, 2));
-  }
-  
+    rpc,
+    signatureProvider })  
 
-  
+    fetch("http://192.168.0.100:8888", {
+      "method": "POST",
+      "headers": {
+        "content-type": "application/json",
+        "accept": "application/json",
+        "access-control-request-headers": "Content-Type, Authorization",
+        "access-control-allow-origin": "*",
+        "access-control-allow-headers": "Origin, Content-Type, X-Auth-Token"
+
+      }
+    })
+    .then(response => response.json())
+    .then(response => {
+      console.log(response)
+    })
+    .catch(err => {
+      console.log(err);
+    });
   // try {
   //   const result = await api.transact({
   //     actions: [{
   //       account: 'aaa',
-  //       name: action,
+  //       name: 'login',
   //       authorization: [{
-  //         actor: 'laura',
+  //         actor: 'matheus',
   //         permission: 'active',
-  //       }],
-  //       data: datavalue,
-  //     }]
+  //       }]
+
+  //     }],
+  //     data: datavalue
   //   }, {
   //     blocksBehind: 3,
   //     expireSeconds: 30,
@@ -54,9 +52,9 @@ async function takeAction(action, datavalue){
 }
 
 class eosApi{
-  static login(username){
+  static login({user}){
     return new Promise((resolve,reject) => {
-      takeAction("login",username)
+      takeAction("login",{user: user})
       .then(()=>{
         resolve();
       })
