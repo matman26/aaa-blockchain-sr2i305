@@ -3,6 +3,7 @@ routes
   .add('/','/home')
   .add('/home','/home')
   .add('/login','/login')
+  .add('/profile/:address','/profile')
   // .add('/campaigns/new','/campaigns/new')
   // .add('/campaigns/:address','/campaigns/show')
   // .add('/campaigns/:address/requests','/campaigns/requests/index')

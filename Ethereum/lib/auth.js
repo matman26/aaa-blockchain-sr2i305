@@ -19,6 +19,7 @@ async function signUp(username,role){
       from: accounts[0]
     })
     result['signature'] = sign
+    result['addr'] = accounts[0]
   } catch (error) {
     console.log(error);
     result = "Authentication has failed"
