@@ -50,7 +50,7 @@ class Login extends Component{
         <Grid as='grid' verticalAlign='middle' textAlign='center'>
           <Grid.Column style={{ maxWidth: 450 }} inverted >
             <div>
-            <video width='450px' height='150px' margin='auto' src="https://ethereum.org/ethereum-hero-dark.mp4" playsInline autoPlay loop muted className='logo'>
+            <video width='400px' height='200px' margin='auto' src="https://ethereum.org/ethereum-hero-dark.mp4" playsInline autoPlay loop muted className='logo'>
             </video>
             </div>
             
@@ -58,10 +58,11 @@ class Login extends Component{
             <Header.Content>Log-in to your account</Header.Content>
               
             </Header>
-            <Form size='large' onSubmit={this.onSubmitEth} error={!!this.state.errorMess} inverted>
-              <Segment stacked inverted>
+            <Form size='large' onSubmit={this.onSubmitEth} error={!!this.state.errorMess}>
+              <Segment as='form'stacked >
                 <Form.Input
                   fluid
+                  label='Username'
                   icon='user'
                   iconPosition='left'
                   placeholder='Username'
@@ -83,9 +84,19 @@ class Login extends Component{
                   content={this.state.errorMess} 
                   compact
                 />
-                <Button color='blue' fluid size='large' type='submit' loading={this.state.loading}>
-                  Login
-                </Button>
+                <Grid verticalAlign='middle' textAlign='center' relaxed>
+                  <Grid.Column width={8}>
+                    <Button color="teal" 
+                      inverted 
+                      fluid 
+                      size='large' 
+                      type='submit' 
+                      loading={this.state.loading}
+                    >
+                      Login
+                    </Button>
+                  </Grid.Column>
+                </Grid>
               </Segment>
             </Form>
            </Grid.Column>
