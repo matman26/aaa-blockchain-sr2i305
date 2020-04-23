@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import Cookie from 'js-cookie';
 import {signUp} from '../lib/auth'
-import eosApi from '../lib/eosAPI'
-import { Button, Form, Grid, Header, Message, Segment, Select } from 'semantic-ui-react'
+import { Button, Form, Grid, Header, Message, Segment, Container } from 'semantic-ui-react'
 import Layout from '../components/Layout'
 import {Router, Link } from '../routes'
 
@@ -47,14 +46,15 @@ class Login extends Component{
   render(){
     return(
       <Layout>
-        <Grid style={{ height: '80vh' }} verticalAlign='middle' textAlign='center' >
+        <Container className="login">
+        <Grid as='grid' verticalAlign='middle' textAlign='center'>
           <Grid.Column style={{ maxWidth: 450 }} inverted >
             <div>
             <video width='450px' height='150px' margin='auto' src="https://ethereum.org/ethereum-hero-dark.mp4" playsInline autoPlay loop muted className='logo'>
             </video>
             </div>
             
-            <Header as='h2' color='blue' textAlign='center'>
+            <Header as='h2' textAlign='center'>
             <Header.Content>Log-in to your account</Header.Content>
               
             </Header>
@@ -91,6 +91,7 @@ class Login extends Component{
            </Grid.Column>
           
         </Grid>
+        </Container>
       </Layout>
     )
   }

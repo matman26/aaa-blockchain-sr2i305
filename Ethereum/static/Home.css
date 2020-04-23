@@ -85,6 +85,35 @@ nav.ui.container .ui.inverted.compact.menu .active.item {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
+.ui.login.container {
+  height: 80vh;
+  /* background-color: blueviolet; */
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+} 
+
+.ui.login.container h2.header {
+  font-size: 50px;
+  color: rgb(90,239,237);
+}
+
+.ui.login.container grid{
+  /* background-color: blueviolet; */
+  height: inherit;
+  margin-top: -4rem;
+
+} 
+
+.ui.login.container form {
+  line-height: 1.6;
+  font-weight: 300;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
 .ui.inverted.vertical.segment footer.ui.segment {
   height: 80px;
   width: 100%;
