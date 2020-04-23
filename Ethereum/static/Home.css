@@ -105,6 +105,24 @@ nav.ui.container .ui.inverted.compact.menu .active.item {
   margin-top: -4rem;
 } 
 
+.ui.login.container grid .card{
+  margin: auto;
+  word-wrap: break-word;
+  box-shadow: 10px 10px 5px teal;
+} 
+
+.ui.login.container grid .card>.content>.header{
+  font-weight: 800;
+  font-size: 1.8571429em;
+  margin-top: -.1425em;
+  line-height: 1.571429em;
+}
+ 
+.ui.login.container grid .card>.content>.meta{
+  font-weight: 400;
+  font-size: 1.1em;
+}
+
 .ui.login.container form {
   background-color:rgb(32, 32, 32) ;
   line-height: 1.6;

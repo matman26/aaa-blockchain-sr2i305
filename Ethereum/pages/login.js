@@ -5,8 +5,6 @@ import { Button, Form, Grid, Header, Message, Segment, Container } from 'semanti
 import Layout from '../components/Layout'
 import {Router, Link } from '../routes'
 
-import web3 from '../ethereum/we3'
-import login from '../ethereum/login';
 
 const options = [
   { key: 'u', text: 'User', value: 1 },
@@ -39,9 +37,6 @@ class Login extends Component{
     if(result.status === true){
       Cookie.set('session', result.signature)
       Router.pushRoute(`/profile/${result.addr}`);
-      const profile = await login.methods.profile(result.addr).call();
-      console.log(profile)
-
       this.setState({loading:false,errorMess:''});
     }else{
       this.setState({errorMess: result})

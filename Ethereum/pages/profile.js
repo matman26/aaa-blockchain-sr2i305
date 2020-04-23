@@ -6,7 +6,7 @@ import Layout from '../components/Layout'
 
 
 const user ={
-  'false': 'Provider',
+  'false': 'Almighty Provider',
   'true': 'Beloved User'
 
 }
@@ -20,13 +20,11 @@ class Profile extends Component{
         role: user[String(profile[1])],
         address: props.query.address
       };
-  }catch(e){
-    console.log("error",e)
-  }
+    }catch(e){
+      console.log("error",e)
     }
+  }
     
-  
-
   renderCards(){
     const{
       username,
@@ -35,7 +33,6 @@ class Profile extends Component{
     } = this.props
     console.log(this.props)
   }
-
   render(){
     return(
 
@@ -44,23 +41,30 @@ class Profile extends Component{
         <Container className="login">
         <Grid as='grid' verticalAlign='middle' textAlign='center'>
           <Grid.Column style={{ maxWidth: 450 }} inverted >
-            <Card>
-              <Image src='/static/eosio.png' wrapped ui={false} />
+            <Card color='teal'>
+              <Image src='/static/jenny.png' wrapped ui={false} />
               <Card.Content>
                 <Card.Header>{this.props.username}</Card.Header>
                 <Card.Meta>
+                  <Icon name='user' />
                   <span className='date'>{this.props.role}</span>
                 </Card.Meta>
                 <Card.Description>
+                  <Icon name='at'
+                  size='large'>
+                  </Icon>
+                  Address: <br/>
+
                   {this.props.address}
+                  
                 </Card.Description>
               </Card.Content>
-              <Card.Content extra>
+              {/* <Card.Content extra>
                 <a>
                   <Icon name='user' />
                   22 Friends
                 </a>
-              </Card.Content>
+              </Card.Content> */}
             </Card>
           </Grid.Column>
           </Grid>  
