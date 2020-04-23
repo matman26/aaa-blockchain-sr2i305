@@ -59,6 +59,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var _jsxFileName = '/Users/lauraceron/Documents/AAA_blockchain/aaa-blockchain-sr2i305/Ethereum/pages/login.js?entry';
 
 
+var options = [{ key: 'u', text: 'User', value: 1 }, { key: 'p', text: 'Provider', value: 0 }];
+
 var Login = function (_Component) {
   (0, _inherits3.default)(Login, _Component);
 
@@ -81,7 +83,7 @@ var Login = function (_Component) {
       loading: false
     }, _this.onSubmitEth = function () {
       var _ref2 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee(event) {
-        var _ref3, result;
+        var _this$state, username, role, _ref3, result;
 
         return _regenerator2.default.wrap(function _callee$(_context) {
           while (1) {
@@ -89,10 +91,11 @@ var Login = function (_Component) {
               case 0:
                 event.preventDefault();
                 _this.setState({ loading: true, errorMess: '' });
-                _context.next = 4;
-                return (0, _auth.signUp)(_this.state.username, 1);
+                _this$state = _this.state, username = _this$state.username, role = _this$state.role;
+                _context.next = 5;
+                return (0, _auth.signUp)(username, role);
 
-              case 4:
+              case 5:
                 _ref3 = _context.sent;
                 result = _ref3.result;
 
@@ -100,12 +103,13 @@ var Login = function (_Component) {
                 if (result.status === true) {
                   _jsCookie2.default.set('session', result.signature);
                   _routes.Router.pushRoute('/');
+                  _this.setState({ loading: false, errorMess: '' });
                 } else {
                   _this.setState({ errorMess: result });
                 }
                 _this.resetState();
 
-              case 9:
+              case 10:
               case 'end':
                 return _context.stop();
             }
@@ -115,28 +119,6 @@ var Login = function (_Component) {
 
       return function (_x) {
         return _ref2.apply(this, arguments);
-      };
-    }(), _this.onSubmitEOS = function () {
-      var _ref4 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee2(event) {
-        return _regenerator2.default.wrap(function _callee2$(_context2) {
-          while (1) {
-            switch (_context2.prev = _context2.next) {
-              case 0:
-                event.preventDefault();
-                _this.setState({ loading: true, errorMess: '' });
-                console.log("Acaaaa");
-                return _context2.abrupt('return', _eosAPI2.default.login(_this.state.username));
-
-              case 5:
-              case 'end':
-                return _context2.stop();
-            }
-          }
-        }, _callee2, _this2);
-      }));
-
-      return function (_x2) {
-        return _ref4.apply(this, arguments);
       };
     }(), _temp), (0, _possibleConstructorReturn3.default)(_this, _ret);
   }
@@ -161,46 +143,65 @@ var Login = function (_Component) {
           fileName: _jsxFileName,
           lineNumber: 49
         }
-      }, _react2.default.createElement(_semanticUiReact.Grid, { style: { height: '80vh' }, verticalAlign: 'middle', columns: 'equal', __source: {
+      }, _react2.default.createElement(_semanticUiReact.Grid, { style: { height: '80vh' }, verticalAlign: 'middle', textAlign: 'center', __source: {
           fileName: _jsxFileName,
           lineNumber: 50
         }
-      }, _react2.default.createElement(_semanticUiReact.Grid.Column, { style: { maxWidth: 450 }, floated: 'left', __source: {
+      }, _react2.default.createElement(_semanticUiReact.Grid.Column, { style: { maxWidth: 450 }, inverted: true, __source: {
           fileName: _jsxFileName,
           lineNumber: 51
         }
-      }, _react2.default.createElement('video', { width: '450px', height: '150px', margin: 'auto', src: 'https://d33wubrfki0l68.cloudfront.net/392e4f97600667731f325389608f9d81e23d949e/5e764/ethereum-hero-light.mp4', playsInline: true, autoPlay: true, loop: true, muted: true, __source: {
+      }, _react2.default.createElement('div', {
+        __source: {
           fileName: _jsxFileName,
           lineNumber: 52
         }
-      }), _react2.default.createElement(_semanticUiReact.Header, { as: 'h2', color: 'blue', textAlign: 'center', __source: {
+      }, _react2.default.createElement('video', { width: '450px', height: '150px', margin: 'auto', src: 'https://ethereum.org/ethereum-hero-dark.mp4', playsInline: true, autoPlay: true, loop: true, muted: true, className: 'logo', __source: {
           fileName: _jsxFileName,
-          lineNumber: 54
+          lineNumber: 53
+        }
+      })), _react2.default.createElement(_semanticUiReact.Header, { as: 'h2', color: 'blue', textAlign: 'center', __source: {
+          fileName: _jsxFileName,
+          lineNumber: 57
         }
       }, _react2.default.createElement(_semanticUiReact.Header.Content, {
         __source: {
-          fileName: _jsxFileName,
-          lineNumber: 55
-        }
-      }, 'Log-in to your account')), _react2.default.createElement(_semanticUiReact.Form, { size: 'large', onSubmit: this.onSubmitEth, error: !!this.state.errorMess, __source: {
           fileName: _jsxFileName,
           lineNumber: 58
         }
-      }, _react2.default.createElement(_semanticUiReact.Segment, { stacked: true, __source: {
+      }, 'Log-in to your account')), _react2.default.createElement(_semanticUiReact.Form, { size: 'large', onSubmit: this.onSubmitEth, error: !!this.state.errorMess, inverted: true, __source: {
           fileName: _jsxFileName,
-          lineNumber: 59
+          lineNumber: 61
+        }
+      }, _react2.default.createElement(_semanticUiReact.Segment, { stacked: true, inverted: true, __source: {
+          fileName: _jsxFileName,
+          lineNumber: 62
         }
       }, _react2.default.createElement(_semanticUiReact.Form.Input, {
         fluid: true,
         icon: 'user',
         iconPosition: 'left',
         placeholder: 'Username',
+        value: this.state.username,
         onChange: function onChange(event) {
           return _this3.setState({ username: event.target.value });
         },
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 60
+          lineNumber: 63
+        }
+      }), _react2.default.createElement(_semanticUiReact.Form.Select, {
+        fluid: true,
+        label: 'Role',
+        options: options,
+        value: this.state.role,
+        onChange: function onChange(e, _ref4) {
+          var value = _ref4.value;
+          return _this3.setState({ role: value });
+        },
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 73
         }
       }), _react2.default.createElement(_semanticUiReact.Message, {
         error: true,
@@ -209,61 +210,11 @@ var Login = function (_Component) {
         compact: true,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 69
+          lineNumber: 80
         }
       }), _react2.default.createElement(_semanticUiReact.Button, { color: 'blue', fluid: true, size: 'large', type: 'submit', loading: this.state.loading, __source: {
           fileName: _jsxFileName,
-          lineNumber: 75
-        }
-      }, 'Login')))), _react2.default.createElement(_semanticUiReact.Grid.Column, { style: { maxWidth: 450 }, floated: 'right', __source: {
-          fileName: _jsxFileName,
-          lineNumber: 81
-        }
-      }, _react2.default.createElement(_semanticUiReact.Image, { centered: true, size: 'small', src: '/static/eosio.png', __source: {
-          fileName: _jsxFileName,
-          lineNumber: 82
-        }
-      }), _react2.default.createElement(_semanticUiReact.Header, { as: 'h2', color: 'blue', textAlign: 'center', __source: {
-          fileName: _jsxFileName,
-          lineNumber: 83
-        }
-      }, _react2.default.createElement(_semanticUiReact.Header.Content, {
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 84
-        }
-      }, 'Log-in to your account')), _react2.default.createElement(_semanticUiReact.Form, { size: 'large', onSubmit: this.onSubmitEOS, error: !!this.state.errorMess, __source: {
-          fileName: _jsxFileName,
           lineNumber: 86
-        }
-      }, _react2.default.createElement(_semanticUiReact.Segment, { stacked: true, __source: {
-          fileName: _jsxFileName,
-          lineNumber: 87
-        }
-      }, _react2.default.createElement(_semanticUiReact.Form.Input, {
-        fluid: true,
-        icon: 'user',
-        iconPosition: 'left',
-        placeholder: 'Username',
-        onChange: function onChange(event) {
-          return _this3.setState({ username: event.target.value });
-        },
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 88
-        }
-      }), _react2.default.createElement(_semanticUiReact.Message, {
-        error: true,
-        header: 'Something went wrong',
-        content: this.state.errorMess,
-        compact: true,
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 97
-        }
-      }), _react2.default.createElement(_semanticUiReact.Button, { color: 'blue', fluid: true, size: 'large', type: 'submit', __source: {
-          fileName: _jsxFileName,
-          lineNumber: 103
         }
       }, 'Login'))))));
     }
@@ -273,4 +224,45 @@ var Login = function (_Component) {
 }(_react.Component);
 
 exports.default = Login;
-//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInBhZ2VzL2xvZ2luLmpzIl0sIm5hbWVzIjpbIlJlYWN0IiwiQ29tcG9uZW50IiwiQ29va2llIiwic2lnblVwIiwiZW9zQXBpIiwiQnV0dG9uIiwiRm9ybSIsIkdyaWQiLCJIZWFkZXIiLCJJbWFnZSIsIk1lc3NhZ2UiLCJTZWdtZW50IiwiTGF5b3V0IiwiUm91dGVyIiwiTGluayIsIkxvZ2luIiwic3RhdGUiLCJ1c2VybmFtZSIsImVycm9yTWVzcyIsInJvbGUiLCJsb2FkaW5nIiwib25TdWJtaXRFdGgiLCJldmVudCIsInByZXZlbnREZWZhdWx0Iiwic2V0U3RhdGUiLCJyZXN1bHQiLCJjb25zb2xlIiwibG9nIiwic3RhdHVzIiwic2V0Iiwic2lnbmF0dXJlIiwicHVzaFJvdXRlIiwicmVzZXRTdGF0ZSIsIm9uU3VibWl0RU9TIiwibG9naW4iLCJoZWlnaHQiLCJtYXhXaWR0aCIsInRhcmdldCIsInZhbHVlIl0sIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBQUEsQUFBTyxBQUFTOzs7O0FBQ2hCLEFBQU87Ozs7QUFDUCxBQUFRLEFBQWE7O0FBQ3JCLEFBQU8sQUFBWTs7OztBQUNuQixBQUFTLEFBQVEsQUFBTSxBQUFNLEFBQVEsQUFBTyxBQUFTOztBQUNyRCxBQUFPLEFBQVk7Ozs7QUFDbkIsQUFBUSxBQUFRLEFBQVk7Ozs7Ozs7SSxBQUV0Qjs7Ozs7Ozs7Ozs7Ozs7OzBNLEFBQ0o7Z0JBQVEsQUFDSSxBQUNWO2lCQUZNLEFBRUssQUFDWDtZQUFNLENBSEEsQUFHQyxBQUNQO2UsQUFKTSxBQUlHO0FBSkgsQUFDTixhLEFBY0Y7MkZBQWMsaUJBQUEsQUFBTyxPQUFQO21CQUFBOztzRUFBQTtvQkFBQTs2Q0FBQTttQkFDWjtzQkFBQSxBQUFNLEFBQ047c0JBQUEsQUFBSyxTQUFTLEVBQUMsU0FBRCxBQUFTLE1BQUssV0FGaEIsQUFFWixBQUFjLEFBQXdCO2dDQUYxQjt1QkFHVyxrQkFBTyxNQUFBLEFBQUssTUFBWixB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QTtTQXpCUixBQUNFLEFBT0UsQUFDRSxBQWdCRSxBQU1OLDZCQUFDLGNBQUQsc0JBQUEsQUFBTSxVQUFPLE9BQU8sRUFBRSxVQUF0QixBQUFvQixBQUFZLE9BQVEsU0FBeEMsQUFBZ0Q7b0JBQWhEO3NCQUFBLEFBQ0E7QUFEQTt5QkFDQSxBQUFDLHdDQUFNLFVBQVAsTUFBZ0IsTUFBaEIsQUFBcUIsU0FBUSxLQUE3QixBQUFpQztvQkFBakM7c0JBREEsQUFDQSxBQUNFO0FBREY7MEJBQ0UsQUFBQyx5Q0FBTyxJQUFSLEFBQVcsTUFBSyxPQUFoQixBQUFzQixRQUFPLFdBQTdCLEFBQXVDO29CQUF2QztzQkFBQSxBQUNFO0FBREY7eUJBQ0csY0FBRCx3QkFBQSxBQUFROztvQkFBUjtzQkFBQTtBQUFBO0FBQUEsU0FISixBQUVFLEFBQ0UsQUFFRiw0Q0FBQSxBQUFDLHVDQUFLLE1BQU4sQUFBVyxTQUFRLFVBQVUsS0FBN0IsQUFBa0MsYUFBYSxPQUFPLENBQUMsQ0FBQyxLQUFBLEFBQUssTUFBN0QsQUFBbUU7b0JBQW5FO3NCQUFBLEFBQ0U7QUFERjt5QkFDRSxBQUFDLDBDQUFRLFNBQVQ7b0JBQUE7c0JBQUEsQUFDRTtBQURGO3VDQUNFLEFBQUMsc0JBQUQsQUFBTTtlQUFOLEFBRUU7Y0FGRixBQUVPLEFBQ0w7c0JBSEYsQUFHZSxBQUNiO3FCQUpGLEFBSWMsQUFDWjtrQkFBVSx5QkFBQTtpQkFDUixPQUFBLEFBQUssU0FBUyxFQUFDLFVBQVUsTUFBQSxBQUFNLE9BRHZCLEFBQ1IsQUFBYyxBQUF3QjtBQU4xQzs7b0JBQUE7c0JBREYsQUFDRSxBQVNBO0FBVEE7QUFDRSwwQkFRRixBQUFDO2VBQUQsQUFFRTtnQkFGRixBQUVTLEFBQ1A7aUJBQVMsS0FBQSxBQUFLLE1BSGhCLEFBR3NCLEFBQ3BCO2lCQUpGOztvQkFBQTtzQkFWRixBQVVFLEFBTUE7QUFOQTtBQUNFLDBCQUtGLEFBQUMseUNBQU8sT0FBUixBQUFjLFFBQU8sT0FBckIsTUFBMkIsTUFBM0IsQUFBZ0MsU0FBUSxNQUF4QyxBQUE2QztvQkFBN0M7c0JBQUE7QUFBQTtTQXZEWixBQUNFLEFBQ0UsQUErQkUsQUFLRSxBQUNFLEFBZ0JFLEFBU2I7Ozs7O0FBRUgsQSxBQXpHb0I7O2tCQXlHcEIsQUFBZSIsImZpbGUiOiJsb2dpbi5qcz9lbnRyeSIsInNvdXJjZVJvb3QiOiIvVXNlcnMvbGF1cmFjZXJvbi9Eb2N1bWVudHMvQUFBX2Jsb2NrY2hhaW4vYWFhLWJsb2NrY2hhaW4tc3IyaTMwNS9FdGhlcmV1bSJ9
+
+// onSubmitEOS = async (event) =>{
+//   event.preventDefault();
+//   this.setState({loading:true,errorMess:''});
+//   console.log("Acaaaa");
+//   const data = {
+//     user: this.state.username
+//   }
+//   return eosApi.login(data)
+//   console.log("Despues promesa");
+// }
+
+
+{/*<Grid.Column style={{ maxWidth: 450 } } floated='right'>
+          <Image centered size='small' src="/static/eosio.png" />
+            <Header as='h2' color='blue' textAlign='center'>
+              <Header.Content>Log-in to your account</Header.Content>
+            </Header>
+            <Form size='large' onSubmit={this.onSubmitEOS} error={!!this.state.errorMess}>
+              <Segment stacked>
+                <Form.Input
+                  fluid
+                  icon='user'
+                  iconPosition='left'
+                  placeholder='Username'
+                  onChange={event => 
+                    this.setState({username: event.target.value})
+                  }
+                />
+                <Message 
+                  error 
+                  header='Something went wrong' 
+                  content={this.state.errorMess} 
+                  compact
+                />
+                <Button color='blue' fluid size='large' type='submit'>
+                  Login
+                </Button>
+              </Segment>
+            </Form>
+          </Grid.Column> */}
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInBhZ2VzL2xvZ2luLmpzIl0sIm5hbWVzIjpbIlJlYWN0IiwiQ29tcG9uZW50IiwiQ29va2llIiwic2lnblVwIiwiZW9zQXBpIiwiQnV0dG9uIiwiRm9ybSIsIkdyaWQiLCJIZWFkZXIiLCJNZXNzYWdlIiwiU2VnbWVudCIsIlNlbGVjdCIsIkxheW91dCIsIlJvdXRlciIsIkxpbmsiLCJvcHRpb25zIiwia2V5IiwidGV4dCIsInZhbHVlIiwiTG9naW4iLCJzdGF0ZSIsInVzZXJuYW1lIiwiZXJyb3JNZXNzIiwicm9sZSIsImxvYWRpbmciLCJvblN1Ym1pdEV0aCIsImV2ZW50IiwicHJldmVudERlZmF1bHQiLCJzZXRTdGF0ZSIsInJlc3VsdCIsImNvbnNvbGUiLCJsb2ciLCJzdGF0dXMiLCJzZXQiLCJzaWduYXR1cmUiLCJwdXNoUm91dGUiLCJyZXNldFN0YXRlIiwiaGVpZ2h0IiwibWF4V2lkdGgiLCJ0YXJnZXQiLCJlIl0sIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBQUEsQUFBTyxBQUFTOzs7O0FBQ2hCLEFBQU87Ozs7QUFDUCxBQUFRLEFBQWE7O0FBQ3JCLEFBQU8sQUFBWTs7OztBQUNuQixBQUFTLEFBQVEsQUFBTSxBQUFNLEFBQVEsQUFBUyxBQUFTOztBQUN2RCxBQUFPLEFBQVk7Ozs7QUFDbkIsQUFBUSxBQUFRLEFBQVk7Ozs7Ozs7QUFFNUIsSUFBTSxVQUFVLENBQ2QsRUFBRSxLQUFGLEFBQU8sS0FBSyxNQUFaLEFBQWtCLFFBQVEsT0FEWixBQUNkLEFBQWlDLEtBQ2pDLEVBQUUsS0FBRixBQUFPLEtBQUssTUFBWixBQUFrQixZQUFZLE9BRmhDLEFBQWdCLEFBRWQsQUFBcUM7O0ksQUFHakM7Ozs7Ozs7Ozs7Ozs7OzswTSxBQUNKO2dCQUFRLEFBQ0ksQUFDVjtpQkFGTSxBQUVLLEFBQ1g7WUFBTSxDQUhBLEFBR0MsQUFDUDtlLEFBSk0sQUFJRztBQUpILEFBQ04sYSxBQWVGOzJGQUFjLGlCQUFBLEFBQU8s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QUFEO2NBQUEsQUFBTSxjQUFOLEFBQU07aUJBQVksT0FBQSxBQUFLLFNBQVMsRUFBRSxNQUFsQyxBQUFrQixBQUFjLEFBQVE7QUFMcEQ7O29CQUFBO3NCQVhGLEFBV0UsQUFPQTtBQVBBO0FBQ0UsMEJBTUYsQUFBQztlQUFELEFBRUU7Z0JBRkYsQUFFUyxBQUNQO2lCQUFTLEtBQUEsQUFBSyxNQUhoQixBQUdzQixBQUNwQjtpQkFKRjs7b0JBQUE7c0JBbEJGLEFBa0JFLEFBTUE7QUFOQTtBQUNFLDBCQUtGLEFBQUMseUNBQU8sT0FBUixBQUFjLFFBQU8sT0FBckIsTUFBMkIsTUFBM0IsQUFBZ0MsU0FBUSxNQUF4QyxBQUE2QyxVQUFTLFNBQVMsS0FBQSxBQUFLLE1BQXBFLEFBQTBFO29CQUExRTtzQkFBQTtBQUFBO1NBdENaLEFBQ0UsQUFDRSxBQUNFLEFBVUUsQUFDRSxBQXdCRSxBQVViOzs7OztBQUVILEEsQUFwRm9COztrQkFvRnBCLEFBQWU7O0FBR2Y7QUFDRTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7OztBQUdBLENBQUMsQUEyQnlCIiwiZmlsZSI6ImxvZ2luLmpzP2VudHJ5Iiwic291cmNlUm9vdCI6Ii9Vc2Vycy9sYXVyYWNlcm9uL0RvY3VtZW50cy9BQUFfYmxvY2tjaGFpbi9hYWEtYmxvY2tjaGFpbi1zcjJpMzA1L0V0aGVyZXVtIn0=

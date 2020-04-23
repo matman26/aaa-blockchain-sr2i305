@@ -27,11 +27,11 @@ class Login extends Component{
       loading: false
     }
   }
+
   onSubmitEth = async (event) =>{
     event.preventDefault();
     this.setState({loading:true,errorMess:''});
     const {username,role} = this.state
-    console.log(username,role); 
     const {result} = await signUp(username,role)
     console.log("Token: ",result)
     if(result.status === true){
@@ -44,30 +44,22 @@ class Login extends Component{
     this.resetState()
   }
 
-  // onSubmitEOS = async (event) =>{
-  //   event.preventDefault();
-  //   this.setState({loading:true,errorMess:''});
-  //   console.log("Acaaaa");
-  //   const data = {
-  //     user: this.state.username
-  //   }
-  //   return eosApi.login(data)
-  //   console.log("Despues promesa");
-  // }
-
   render(){
     return(
       <Layout>
-        <Grid style={{ height: '80vh' }} verticalAlign='middle' textAlign='center'>
-          <Grid.Column style={{ maxWidth: 450 }}>
-            <video width='450px' height='150px' margin='auto' src="https://d33wubrfki0l68.cloudfront.net/392e4f97600667731f325389608f9d81e23d949e/5e764/ethereum-hero-light.mp4" playsInline autoPlay loop muted>
+        <Grid style={{ height: '80vh' }} verticalAlign='middle' textAlign='center' >
+          <Grid.Column style={{ maxWidth: 450 }} inverted >
+            <div>
+            <video width='450px' height='150px' margin='auto' src="https://ethereum.org/ethereum-hero-dark.mp4" playsInline autoPlay loop muted className='logo'>
             </video>
+            </div>
+            
             <Header as='h2' color='blue' textAlign='center'>
             <Header.Content>Log-in to your account</Header.Content>
               
             </Header>
-            <Form size='large' onSubmit={this.onSubmitEth} error={!!this.state.errorMess}>
-              <Segment stacked>
+            <Form size='large' onSubmit={this.onSubmitEth} error={!!this.state.errorMess} inverted>
+              <Segment stacked inverted>
                 <Form.Input
                   fluid
                   icon='user'
@@ -80,12 +72,10 @@ class Login extends Component{
                 />
                 <Form.Select
                   fluid
+                  label='Role'
                   options={options}
-                  placeholder='Role'
                   value = {this.state.role}
-                  onChange={event => 
-                    this.setState({role: event.target.value})
-                  }
+                  onChange={(e, { value }) => this.setState({ role: value })}
                 />
                 <Message 
                   error 
@@ -99,7 +89,28 @@ class Login extends Component{
               </Segment>
             </Form>
            </Grid.Column>
-          {/*<Grid.Column style={{ maxWidth: 450 } } floated='right'>
+          
+        </Grid>
+      </Layout>
+    )
+  }
+}
+export default Login
+
+
+// onSubmitEOS = async (event) =>{
+  //   event.preventDefault();
+  //   this.setState({loading:true,errorMess:''});
+  //   console.log("Acaaaa");
+  //   const data = {
+  //     user: this.state.username
+  //   }
+  //   return eosApi.login(data)
+  //   console.log("Despues promesa");
+  // }
+
+
+  {/*<Grid.Column style={{ maxWidth: 450 } } floated='right'>
           <Image centered size='small' src="/static/eosio.png" />
             <Header as='h2' color='blue' textAlign='center'>
               <Header.Content>Log-in to your account</Header.Content>
@@ -127,9 +138,3 @@ class Login extends Component{
               </Segment>
             </Form>
           </Grid.Column> */}
-        </Grid>
-      </Layout>
-    )
-  }
-}
-export default Login
