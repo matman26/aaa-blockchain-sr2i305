@@ -16,7 +16,7 @@
     "ganache-cli": "^6.9.1",
     "js-cookie": "^2.2.1",
     "mocha": "^7.1.1",
-    "next": "^4.2.3",
+    "next": "^11.1.1",
     "next-cookies": "^2.0.3",
     "next-routes": "^1.4.2",
     "node": "^13.12.0",
